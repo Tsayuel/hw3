@@ -106,7 +106,8 @@ int main(int argc, char* argv[])
 
     head = readList(argv[1]);
     cout << "Part2: " << endl;
-    Node* temp = llfilter(head,OddComp);
+		OddComp a;
+    Node* temp = llfilter(head,a);
     print(temp);
 
 
