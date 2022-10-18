@@ -43,7 +43,8 @@ void Stack<T>::push(const T& item)
 template <typename T>
 void Stack<T>::pop()
 {
-  if(empty()){
+  if(empty())
+	{
     throw std::underflow_error("Stack is empty.");
   }
   std::vector<T>::pop_back();
