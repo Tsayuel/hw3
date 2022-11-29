@@ -72,13 +72,9 @@ public:
 
 private:
   /// Add whatever helper functions and data members you need below
-  std::vector <T> elements; //vector array (template t)
+  std::vector <T> elements; 
   PComparator comp;
   int m_levels;
-  //T left; //left (template T)
-  //T right; //right (template T)
-  //T parent; //parent (if you're going up)
-
 };
 
 // Add implementation of member functions here
@@ -107,25 +103,30 @@ bool Heap<T,PComparator>::empty() const
 template <typename T, typename PComparator>
 void Heap<T,PComparator>::heapify_down(int i)
 {
-  int i_left = 2*i +1;
-  int i_right = 2*i +2;
+  int left = 2*i+1;
+  int right = 2*i+2;
 
   int size = elements.size();
   int to_switch = i;
 
-  if (i_left < size){
-    if (comp(elements[i_left], elements[i])){ 
-      to_switch = i_left;
+  if (left < size)
+	{
+    if (comp(elements[left], elements[i]))
+		{ 
+      to_switch = left;
     }
   }
   
-  if (i_right < size){
-    if (comp(elements[i_right], elements[to_switch])){
-      to_switch = i_right;
+  if (right < size)
+	{
+    if (comp(elements[right], elements[to_switch]))
+		{
+      to_switch = right;
     }
   }
 
-  if (to_switch != i){
+  if (to_switch != i)
+	{
     std::swap(elements[i], elements[to_switch]);
     heapify_down(to_switch);
   }
@@ -135,14 +136,9 @@ template <typename T, typename PComparator>
 void Heap<T,PComparator>::heapify_up(int i)
 {
     int i_parent = (i-1)/2;
-    //check if elements i parent is not in order
-    if (comp(elements[i], elements[i_parent])){
-      //std::cout << "swap" << elements [i] <<" " << elements[i_parent]<< std::endl;
-      // swap the two if heap property is violated
+    if (comp(elements[i], elements[i_parent]))
+		{
       std::swap(elements[i_parent], elements[i]);
-      //std::cout << "heapify "<< elements[i_parent] << std::endl;
-
-      // call heapify-up on the parent
       heapify_up(i_parent);
     }
 }
@@ -153,7 +149,6 @@ void Heap<T,PComparator>::push (const T &item)
   elements.push_back(item);
 
   int i = elements.size() - 1;
-  //std::cout << "heapify up " << elements[i] << std::endl;
   heapify_up(i);
 }
 
