@@ -6,7 +6,7 @@
 
 // Use inheritance from std::vector (choose public/private) as appropriate
 template <typename T>
-class Stack 
+class Stack : private std::vector<T>
 {
 public:
     Stack();
@@ -19,46 +19,53 @@ public:
     // Add other members only if necessary
 };
 
-template <typename T> 
-bool Stack<T>::empty() const
-{
-  return std::vector<T>::empty();
+template<typename T>
+Stack<T>::Stack()
+{ 
+     
 }
 
-//size
-template <typename T>
+template<typename T>
+Stack<T>::~Stack()
+{ 
+
+}
+
+template<typename T>
+bool Stack<T>::empty() const 
+{
+    return std::vector<T>::empty(); 
+}
+
+template<typename T>
 size_t Stack<T>::size() const
 {
-  return std::vector<T>::size();
+    return std::vector<T>::size();
 }
 
-//push
-template <typename T>
-void Stack<T>::push(const T& item)
+template<typename T>
+void Stack<T>::push(const T& newval)
 {
-  std::vector<T>::push_back(item);
+    std::vector<T>::push_back(newval);
 }
 
-//pop 
-template <typename T>
+template<typename T>
 void Stack<T>::pop()
 {
-  if(empty())
-	{
-    throw std::underflow_error("Stack is empty.");
-  }
-  std::vector<T>::pop_back();
+    if (empty())
+        throw std::underflow_error("is empty");
+    std::vector<T>::pop_back();
+
 }
 
-//top
-template <typename T>
+template<typename T>
 const T& Stack<T>::top() const
 {
-  if(empty())
-  {
-    throw std::underflow_error("Stack is empty.");
-  }
-  return std::vector<T>::back();
+    if (empty())
+        throw std::underflow_error("is empty");
+    return std::vector<T>::back();
+
 }
+
 
 #endif
